@@ -5,6 +5,7 @@ from src.api.health import router as health_router
 from src.api.ingestion import router as ingestion_router
 from src.api.rules import router as rules_router
 from src.api.reasoning import router as reasoning_router
+from src.api.retrieval import router as retrieval_router
 from src.models.schemas import RootResponse
 
 def create_app() -> FastAPI:
@@ -34,6 +35,7 @@ def create_app() -> FastAPI:
     app.include_router(ingestion_router)
     app.include_router(rules_router)
     app.include_router(reasoning_router)
+    app.include_router(retrieval_router)
 
     @app.get("/", response_model=RootResponse, tags=["Root"])
     def read_root():
