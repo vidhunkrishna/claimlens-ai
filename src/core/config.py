@@ -1,4 +1,9 @@
+import os
+from dotenv import load_dotenv
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+# Load local .env file into environment if present, without overwriting explicit OS environment variables
+load_dotenv(override=False)
 
 class Settings(BaseSettings):
     """
@@ -18,3 +23,4 @@ class Settings(BaseSettings):
     )
 
 settings = Settings()
+
