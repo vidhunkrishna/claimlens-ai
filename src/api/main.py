@@ -7,6 +7,7 @@ from src.api.rules import router as rules_router
 from src.api.reasoning import router as reasoning_router
 from src.api.retrieval import router as retrieval_router
 from src.api.contradictions import router as contradictions_router
+from src.api.investigation import router as investigation_router
 from src.models.schemas import RootResponse
 
 def create_app() -> FastAPI:
@@ -38,6 +39,7 @@ def create_app() -> FastAPI:
     app.include_router(reasoning_router)
     app.include_router(retrieval_router)
     app.include_router(contradictions_router)
+    app.include_router(investigation_router)
 
     @app.get("/", response_model=RootResponse, tags=["Root"])
     def read_root():

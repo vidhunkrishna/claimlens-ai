@@ -149,7 +149,20 @@ def evaluate_driver_license(package: NormalizedClaimPackage) -> RuleResult:
 
     dl_no = dl_no_fact.value if dl_no_fact else None
 
+    claim_type = _get_fact_value(facts, "claim_type")
+    is_theft = (claim_type == "TOTAL_THEFT") or (DocumentType.KEY_DECLARATION in {d.document_type for d in package.documents})
+
     if not dl_no or str(dl_no).strip() == "" or dl_provided is False:
+        if is_theft:
+            return RuleResult(
+                rule_id="RULE-DRIVER-LICENSE",
+                policy_clause_id="POL-003",
+                rule_name="Valid Driving License Verification",
+                status=RuleStatus.PASS,
+                explanation="Vehicle stolen while parked; driver license check is not applicable for parked total theft claims.",
+                input_values={"claim_type": claim_type, "is_theft": True},
+                source_document_ids=doc_ids
+            )
         return RuleResult(
             rule_id="RULE-DRIVER-LICENSE",
             policy_clause_id="POL-010",
