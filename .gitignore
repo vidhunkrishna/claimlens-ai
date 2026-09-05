@@ -48,6 +48,6 @@ htmlcov/
 *.log
 logs/
 
-# Data & Cache (preserve directory structure)
-data/*
-!data/.gitkeep
+# Data temporary scratch and cache
+data/temp/
+data/cache/

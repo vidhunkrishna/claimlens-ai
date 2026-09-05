@@ -1,0 +1,15 @@
+{
+  "document_id": "DOC-CLM003-ID",
+  "claim_id": "CLM-003",
+  "document_type": "INCIDENT_DESCRIPTION",
+  "source": "Claimant Written Statement",
+  "content": "On 20th August 2026 at around 2:15 AM, while driving home along the NH-48 flyover near Gurugram, I lost control of the vehicle on a slick curve and crashed head-on into the concrete highway guardrail. The front end suffered heavy damage.",
+  "metadata": {
+    "author": "Anil Sharma",
+    "statement_date": "2026-08-22",
+    "incident_date_mentioned": "2026-08-20",
+    "incident_time_mentioned": "02:15",
+    "location_mentioned": "NH-48 Flyover, Gurugram",
+    "impact_type": "High-speed collision with concrete highway guardrail"
+  }
+}

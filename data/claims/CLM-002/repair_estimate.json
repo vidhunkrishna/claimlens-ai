@@ -1,0 +1,19 @@
+{
+  "document_id": "DOC-CLM002-RE",
+  "claim_id": "CLM-002",
+  "document_type": "REPAIR_ESTIMATE",
+  "source": "Metro TVS Workshop",
+  "content": "Itemized Repair Estimate for vehicle MH-02-CB-9876 dated 2026-08-14. Total estimated cost: ₹14,200. Items: 1. Rear Mudguard & Frame Repair (₹8,500), 2. Tail Light Assembly & Wiring (₹4,200), 3. Labor Charges (₹1,500).",
+  "metadata": {
+    "workshop_name": "Metro TVS Workshop, Andheri",
+    "estimate_number": "EST-2026-07712",
+    "estimate_date": "2026-08-14",
+    "vehicle_registration": "MH-02-CB-9876",
+    "line_items": [
+      {"description": "Rear Mudguard & Frame Repair", "amount": 8500},
+      {"description": "Tail Light Assembly & Wiring", "amount": 4200},
+      {"description": "Labor Charges", "amount": 1500}
+    ],
+    "total_amount": 14200
+  }
+}

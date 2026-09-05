@@ -1,0 +1,108 @@
+{
+  "policy_metadata": {
+    "policy_type": "Comprehensive Motor Insurance Standard Policy",
+    "version": "2026.1",
+    "applicable_vehicles": ["Private Cars", "Two-Wheelers"],
+    "jurisdiction": "India (Motor Vehicles Act Compliant)"
+  },
+  "clauses": [
+    {
+      "clause_id": "POL-001",
+      "title": "Covered Incidents",
+      "category": "Coverage",
+      "text": "The Company will indemnify the insured against loss or damage to the vehicle insured and/or its accessories whilst thereon: (a) by accidental external means; (b) by fire, explosion, self-ignition or lightning; (c) by burglary, housebreaking or theft; (d) by riot and strike; (e) by earthquake (fire and shock damage); (f) by flood, typhoon, hurricane, storm, tempest, inundation, cyclone, hail storm, frost; (g) whilst in transit by road, rail, inland waterway, lift, elevator or air.",
+      "applicable_to": ["Cars", "Two-Wheelers"]
+    },
+    {
+      "clause_id": "POL-002",
+      "title": "Exclusion - Intoxication and Substance Abuse",
+      "category": "Exclusions",
+      "text": "The Company shall not be liable to make any payment in respect of any accidental loss or damage suffered whilst the insured vehicle is being driven by or is under the charge of any person under the influence of intoxicating liquor, alcohol, or drugs. Any presence of Blood Alcohol Concentration (BAC) exceeding 0.03% w/v or charges under Section 185 of the Motor Vehicles Act shall constitute complete exclusion of liability.",
+      "applicable_to": ["Cars", "Two-Wheelers"]
+    },
+    {
+      "clause_id": "POL-003",
+      "title": "Exclusion - Invalid or Missing Driving License",
+      "category": "Exclusions",
+      "text": "The Company shall not be liable under this policy if the vehicle is being driven by any person who is not duly licensed to drive the vehicle or who is disqualified from holding or obtaining such a license, or holds an expired license without timely renewal application.",
+      "applicable_to": ["Cars", "Two-Wheelers"]
+    },
+    {
+      "clause_id": "POL-004",
+      "title": "Exclusion - Commercial or Unauthorized Vehicle Usage",
+      "category": "Exclusions",
+      "text": "The Company shall not be liable for any loss or damage incurred whilst the private vehicle is being used for commercial hire, reward, speed testing, racing, pace-making, or any purpose other than private social, domestic, and pleasure purposes.",
+      "applicable_to": ["Cars", "Two-Wheelers"]
+    },
+    {
+      "clause_id": "POL-005",
+      "title": "Exclusion - Wear, Tear, and Mechanical Breakdown",
+      "category": "Exclusions",
+      "text": "The Company shall not be liable for normal wear and tear, aging, gradual deterioration, rust, corrosion, mechanical or electrical breakdown, failures, or breakages, nor for damage to tires and tubes unless the vehicle is damaged at the same time in an accidental collision.",
+      "applicable_to": ["Cars", "Two-Wheelers"]
+    },
+    {
+      "clause_id": "POL-006",
+      "title": "Exclusion - Consequential Loss",
+      "category": "Exclusions",
+      "text": "The Company shall not be liable for any indirect or consequential financial loss, loss of use, loss of value, or delay penalties arising out of an accidental incident or repair period.",
+      "applicable_to": ["Cars", "Two-Wheelers"]
+    },
+    {
+      "clause_id": "POL-007",
+      "title": "Exclusion - Unreasonable Delay in Claim Intimation",
+      "category": "Exclusions",
+      "text": "Notice of any claim must be given to the Company immediately upon occurrence. Failure to intimate accidental damage claims within 7 days, or theft claims within 48 hours, without documented proof of unavoidable emergency or incapacitation, shall result in repudiation or rejection of the claim.",
+      "applicable_to": ["Cars", "Two-Wheelers"]
+    },
+    {
+      "clause_id": "POL-008",
+      "title": "Insured Declared Value (IDV) and Depreciation Rules",
+      "category": "Valuation",
+      "text": "The Insured Declared Value (IDV) of the vehicle is fixed on the basis of the manufacturer's listed selling price of the brand/model adjusted for age depreciation. A claim shall be treated as Constructive Total Loss (CTL) if the aggregate cost of retrieval and repair exceeds 75% of the IDV.",
+      "applicable_to": ["Cars", "Two-Wheelers"]
+    },
+    {
+      "clause_id": "POL-009",
+      "title": "Claim Intimation & Reporting Windows",
+      "category": "Procedures",
+      "text": "1. Accidental Damage: Intimation to insurer must be submitted within 7 calendar days of occurrence.\n2. Theft Claims: Intimation to Police (FIR) within 24 hours of discovery and to Insurer within 48 hours of discovery.",
+      "applicable_to": ["Cars", "Two-Wheelers"]
+    },
+    {
+      "clause_id": "POL-010",
+      "title": "Mandatory Document Submission Checklist",
+      "category": "Documentation",
+      "text": "The insured must submit the following verified documents for claim processing:\n(a) Fully completed and signed Claim Form;\n(b) Self-attested copy of valid Driving License of the person driving at the time of accident;\n(c) Copy of Vehicle Registration Certificate (RC Book);\n(d) Original Itemized Repair Estimate / Invoice from workshop;\n(e) For Theft/Major Accidents: Certified copy of First Information Report (FIR) registered with Police;\n(f) For Theft Claims: Original vehicle keys (both sets) and Police Non-Traceable Report.",
+      "applicable_to": ["Cars", "Two-Wheelers"]
+    },
+    {
+      "clause_id": "POL-011",
+      "title": "Repair Claim Procedure and Surveyor Inspection",
+      "category": "Claims Settlement",
+      "text": "Prior to commencing repairs, an authorized Surveyor & Loss Assessor empanelled by the Company must inspect the vehicle and approve the repair estimate. Any repairs executed prior to physical survey inspection shall not be admissible for reimbursement.",
+      "applicable_to": ["Cars", "Two-Wheelers"]
+    },
+    {
+      "clause_id": "POL-012",
+      "title": "Theft Claim Settlement & Key Surrender Rules",
+      "category": "Claims Settlement",
+      "text": "In the event of total theft of the vehicle, claim settlement requires: (1) Immediate FIR filing; (2) Submission of all original ignition keys issued by the manufacturer; (3) Final Police Non-Traceable Certificate under Section 173 CrPC; (4) Transfer of vehicle RC to the Company. Inability to surrender both original keys without a prior police report of key loss shall indicate negligence and block claim approval.",
+      "applicable_to": ["Cars", "Two-Wheelers"]
+    },
+    {
+      "clause_id": "POL-013",
+      "title": "Compulsory and Voluntary Deductibles",
+      "category": "Deductibles",
+      "text": "Claims are subject to compulsory deductibles per claim as follows:\n- Private Cars (Engine capacity <= 1500cc): ₹1,000\n- Private Cars (Engine capacity > 1500cc): ₹2,000\n- Two-Wheelers: ₹100\nIn addition, any voluntary excess selected at policy inception will be deducted from the net claim admissible amount.",
+      "applicable_to": ["Cars", "Two-Wheelers"]
+    },
+    {
+      "clause_id": "POL-014",
+      "title": "Limitation of Liability & Statutory Endorsements",
+      "category": "Legal",
+      "text": "Liability of the Company for own damage is strictly capped at the IDV specified in the Policy Schedule. Third-Party Property Damage (TPPD) liability is capped at ₹7,50,000 for private cars and ₹1,00,000 for two-wheelers, subject to Motor Vehicles Act provisions.",
+      "applicable_to": ["Cars", "Two-Wheelers"]
+    }
+  ]
+}

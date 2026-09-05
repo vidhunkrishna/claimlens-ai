@@ -1,0 +1,19 @@
+{
+  "document_id": "DOC-CLM001-RE",
+  "claim_id": "CLM-001",
+  "document_type": "REPAIR_ESTIMATE",
+  "source": "Trident Hyundai Authorized Workshop",
+  "content": "Official Itemized Repair Estimate for vehicle KA-01-MJ-4321 dated 2026-08-11. Total estimated repair cost: ₹18,500. Items: 1. Front Bumper Replacement & Paint (₹11,500), 2. Right Headlight Assembly (₹6,000), 3. Labor & Alignment (₹1,000).",
+  "metadata": {
+    "workshop_name": "Trident Hyundai Authorized Workshop, Indiranagar",
+    "estimate_number": "EST-2026-08912",
+    "estimate_date": "2026-08-11",
+    "vehicle_registration": "KA-01-MJ-4321",
+    "line_items": [
+      {"description": "Front Bumper Replacement & Painting", "amount": 11500},
+      {"description": "Right Headlight Assembly", "amount": 6000},
+      {"description": "Labor & Alignment", "amount": 1000}
+    ],
+    "total_amount": 18500
+  }
+}

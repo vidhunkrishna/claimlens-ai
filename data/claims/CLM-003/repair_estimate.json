@@ -1,0 +1,20 @@
+{
+  "document_id": "DOC-CLM003-RE",
+  "claim_id": "CLM-003",
+  "document_type": "REPAIR_ESTIMATE",
+  "source": "Grace Honda Authorized Service Center",
+  "content": "Detailed Structural Repair Estimate for vehicle DL-03-CC-5544 dated 2026-08-21. Total estimated repair cost: ₹1,45,000. Line items: Front Radiator Core & Condenser (₹38,000), Bonnet Assembly & Painting (₹32,000), Engine Subframe & Suspension Overhaul (₹60,000), Mechanical Labor (₹15,000).",
+  "metadata": {
+    "workshop_name": "Grace Honda Authorized Service Center, Gurugram",
+    "estimate_number": "EST-2026-09943",
+    "estimate_date": "2026-08-21",
+    "vehicle_registration": "DL-03-CC-5544",
+    "line_items": [
+      {"description": "Front Radiator Core & Condenser", "amount": 38000},
+      {"description": "Bonnet Assembly & Painting", "amount": 32000},
+      {"description": "Engine Subframe & Suspension Overhaul", "amount": 60000},
+      {"description": "Mechanical Labor", "amount": 15000}
+    ],
+    "total_amount": 145000
+  }
+}

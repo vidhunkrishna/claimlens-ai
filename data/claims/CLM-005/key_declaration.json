@@ -1,0 +1,14 @@
+{
+  "document_id": "DOC-CLM005-KD",
+  "claim_id": "CLM-005",
+  "document_type": "KEY_DECLARATION",
+  "source": "Claimant & OEM Yamaha Dealer",
+  "content": "Original Ignition Keys Surrender Certificate. Claimant Vikram R has surrendered both original OEM manufacturer keys (Key Code Y-8891-A and Key Code Y-8891-B) for vehicle KA-05-EV-7788 to the insurer. Verification by authorized dealer confirms both keys are original and matching the ignition lock cylinder code.",
+  "metadata": {
+    "keys_surrendered": 2,
+    "key_codes": ["Y-8891-A", "Y-8891-B"],
+    "oem_verification": "CONFIRMED_ORIGINAL",
+    "all_keys_accounted_for": true,
+    "satisfies_policy_clause": "POL-012"
+  }
+}

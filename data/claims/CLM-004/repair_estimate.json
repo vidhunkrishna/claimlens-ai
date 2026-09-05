@@ -1,0 +1,18 @@
+{
+  "document_id": "DOC-CLM004-RE",
+  "claim_id": "CLM-004",
+  "document_type": "REPAIR_ESTIMATE",
+  "source": "ABT Maruti Service Center",
+  "content": "Repair Estimate for vehicle TN-09-AX-1234 dated 2026-08-24. Total estimated repair cost: ₹12,000. Items: 1. Left Front Fender Replacement (₹8,000), 2. Painting & Tinkering (₹4,000).",
+  "metadata": {
+    "workshop_name": "ABT Maruti Service Center, Chennai",
+    "estimate_number": "EST-2026-05112",
+    "estimate_date": "2026-08-24",
+    "vehicle_registration": "TN-09-AX-1234",
+    "line_items": [
+      {"description": "Left Front Fender Replacement", "amount": 8000},
+      {"description": "Painting & Tinkering", "amount": 4000}
+    ],
+    "total_amount": 12000
+  }
+}

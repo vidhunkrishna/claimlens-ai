@@ -1,0 +1,14 @@
+{
+  "document_id": "DOC-CLM005-ID",
+  "claim_id": "CLM-005",
+  "document_type": "INCIDENT_DESCRIPTION",
+  "source": "Claimant Written Statement",
+  "content": "Parked my Yamaha FZ-S V3 (KA-05-EV-7788) at Indiranagar Metro Station paid parking lot at 8:00 PM on 5th August 2026. Returned next morning at 8:00 AM to find the handlebar lock broken and the motorcycle stolen. Immediately searched nearby areas and registered an FIR at Indiranagar Police Station at 11:30 AM.",
+  "metadata": {
+    "author": "Vikram R",
+    "statement_date": "2026-08-07",
+    "parking_location": "Indiranagar Metro Station Paid Parking",
+    "theft_window": "2026-08-05 20:00 to 2026-08-06 08:00",
+    "action_taken": "Immediate police FIR and insurer intimation"
+  }
+}

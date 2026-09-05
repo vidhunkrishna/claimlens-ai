@@ -1,0 +1,16 @@
+{
+  "document_id": "DOC-CLM002-ID",
+  "claim_id": "CLM-002",
+  "document_type": "INCIDENT_DESCRIPTION",
+  "source": "Claimant Written Statement",
+  "content": "On 18th August 2026 at around 11:00 PM, I (Priya Sharma, sister of policyholder) was riding the TVS Jupiter (MH-02-CB-9876) home from late office hours near Bandra Kurla Complex (BKC), Mumbai when a stray dog unexpectedly ran across the street causing me to lose balance and crash near the flyover.",
+  "metadata": {
+    "author": "Priya Sharma",
+    "statement_date": "2026-08-19",
+    "incident_date_mentioned": "2026-08-18",
+    "incident_time_mentioned": "23:00",
+    "driver_name_mentioned": "Priya Sharma",
+    "location_mentioned": "Bandra Kurla Complex (BKC), Mumbai",
+    "impact_type": "Skidded while avoiding stray animal"
+  }
+}

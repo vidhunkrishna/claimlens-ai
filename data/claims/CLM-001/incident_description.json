@@ -1,0 +1,15 @@
+{
+  "document_id": "DOC-CLM001-ID",
+  "claim_id": "CLM-001",
+  "document_type": "INCIDENT_DESCRIPTION",
+  "source": "Claimant Written Statement",
+  "content": "On 10th August 2026 at around 4:30 PM, while reversing out of my designated parking slot (B-204) at Green Acres Apartment, Bengaluru, I misjudged the turning radius and the front right bumper scraped against a concrete pillar. The impact cracked the plastic front bumper and shattered the right headlight lens. No other vehicles or third parties were involved.",
+  "metadata": {
+    "author": "Rajesh Kumar",
+    "statement_date": "2026-08-12",
+    "incident_date_mentioned": "2026-08-10",
+    "incident_time_mentioned": "16:30",
+    "location_mentioned": "Green Acres Apartment, Bengaluru",
+    "impact_type": "Collision with stationary concrete pillar"
+  }
+}

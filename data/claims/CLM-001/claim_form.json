@@ -1,0 +1,20 @@
+{
+  "document_id": "DOC-CLM001-CF",
+  "claim_id": "CLM-001",
+  "document_type": "CLAIM_FORM",
+  "source": "Claimant",
+  "content": "Motor Insurance Claim Form submitted by Rajesh Kumar. Incident Date: 2026-08-10 at 16:30. Intimation Date: 2026-08-12. Driver: Rajesh Kumar (DL: KA-01-2018-0098765, Valid till 2034-05-12). Vehicle: KA-01-MJ-4321. Location: Basement Parking, Green Acres Apartment, Bengaluru. Damaged Parts: Front Bumper, Right Headlight Assembly. Estimated Amount: ₹18,500.",
+  "metadata": {
+    "claimant_name": "Rajesh Kumar",
+    "incident_date": "2026-08-10",
+    "incident_time": "16:30",
+    "intimation_date": "2026-08-12",
+    "driver_name": "Rajesh Kumar",
+    "driver_license_number": "KA-01-2018-0098765",
+    "driver_license_expiry": "2034-05-12",
+    "vehicle_registration": "KA-01-MJ-4321",
+    "incident_location": "Basement Parking, Green Acres Apartment, Bengaluru",
+    "damaged_parts": ["Front Bumper", "Right Headlight Assembly"],
+    "estimated_claim_amount": 18500
+  }
+}
