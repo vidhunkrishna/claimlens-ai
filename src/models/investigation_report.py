@@ -4,6 +4,12 @@ from pydantic import BaseModel, Field
 from src.models.rules import RuleResult
 from src.models.contradictions import CrossDocumentContradiction
 
+class ConfidenceLevel(str, Enum):
+    HIGH = "HIGH"
+    MEDIUM = "MEDIUM"
+    LOW = "LOW"
+    UNKNOWN = "UNKNOWN"
+
 class ExecutiveResult(str, Enum):
     APPROVE = "APPROVE"
     REJECT = "REJECT"
@@ -52,6 +58,7 @@ class EvidenceFinding(BaseModel):
     source_document_type: str = Field(..., description="Source Document Type")
     exact_source_text: str = Field(..., description="Exact text excerpt retrieved from source document")
     policy_clause_id: Optional[str] = Field(None, description="Associated Policy Clause ID if applicable")
+    confidence: ConfidenceLevel = Field(ConfidenceLevel.HIGH, description="Confidence in finding status")
 
 class HumanEscalationDetail(BaseModel):
     requires_human_review: bool = Field(..., description="True if human investigator review is required")
@@ -63,6 +70,8 @@ class ClaimInvestigationReport(BaseModel):
     Structured 9-Section Final Claim Investigation Report.
     """
     executive_result: ExecutiveResult = Field(..., description="1. Executive Result (APPROVE, REJECT, REQUEST INFORMATION, ESCALATE)")
+    overall_confidence: ConfidenceLevel = Field(..., description="Explicit Evidence Confidence Level (HIGH, MEDIUM, LOW, UNKNOWN)")
+    confidence_explanation: str = Field(..., description="Explanation for confidence level classification")
     claim_overview: ClaimOverview = Field(..., description="2. Claim Overview")
     document_completeness: DocumentCompletenessSummary = Field(..., description="3. Document Completeness")
     consistency_analysis: ConsistencyAnalysisSummary = Field(..., description="4. Consistency Analysis")
@@ -71,3 +80,4 @@ class ClaimInvestigationReport(BaseModel):
     evidence_findings: List[EvidenceFinding] = Field(default_factory=list, description="7. Itemized Findings with Exact Source Excerpts")
     recommendation_rationale: str = Field(..., description="8. Evidence-Derived Recommendation Rationale")
     human_escalation: HumanEscalationDetail = Field(..., description="9. Human Escalation Rationale & Points")
+

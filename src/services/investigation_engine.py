@@ -5,6 +5,7 @@ from src.models.contradictions import ContradictionReport, ContradictionSeverity
 from src.models.gemini_reasoning import GeminiReasoningOutput, ReasoningStatus
 from src.models.investigation_report import (
     ExecutiveResult,
+    ConfidenceLevel,
     ClaimOverview,
     DocumentCompletenessSummary,
     ConsistencyAnalysisSummary,
@@ -75,6 +76,40 @@ def _build_doc_completeness(package: NormalizedClaimPackage) -> DocumentComplete
         missing_documents=missing
     )
 
+def _calculate_confidence_model(
+    doc_summary: DocumentCompletenessSummary,
+    contradiction_report: ContradictionReport,
+    rules_report: RulesEvaluationReport,
+    gemini_res: GeminiReasoningOutput,
+    policy_items: List[PolicyAnalysisItem]
+) -> tuple[ConfidenceLevel, str]:
+    """
+    Calculate explicit evidence confidence model classification: HIGH, MEDIUM, LOW, or UNKNOWN.
+    Explains the exact rationale for the assigned confidence category.
+    """
+    if gemini_res.reasoning_status == ReasoningStatus.FALLBACK and not doc_summary.is_complete:
+        return ConfidenceLevel.UNKNOWN, "UNKNOWN / MANUAL REVIEW REQUIRED: Incomplete evidence package and AI reasoning service unavailable."
+
+    if len(policy_items) == 0:
+        return ConfidenceLevel.UNKNOWN, "UNKNOWN / HUMAN REVIEW REQUIRED: No relevant policy clause found or applicable to this claim scenario."
+
+    if contradiction_report.total_contradictions_found > 0:
+        return ConfidenceLevel.LOW, f"LOW CONFIDENCE: Detected {contradiction_report.total_contradictions_found} severe cross-document evidence contradictions."
+
+    if not doc_summary.is_complete:
+        return ConfidenceLevel.LOW, f"LOW CONFIDENCE: Missing mandatory documentation ({', '.join(doc_summary.missing_documents)})."
+
+    has_warnings = any(r.status == RuleStatus.WARN for r in rules_report.rule_results)
+    needs_info = any(r.status == RuleStatus.NEEDS_INFO for r in rules_report.rule_results)
+
+    if has_warnings or needs_info:
+        return ConfidenceLevel.MEDIUM, "MEDIUM CONFIDENCE: All mandatory documents present, but deterministic rules flagged threshold warnings or required minor clarification."
+
+    if rules_report.failed_count > 0:
+        return ConfidenceLevel.HIGH, f"HIGH CONFIDENCE: Clear deterministic rule failure ({rules_report.failed_count} rules failed, e.g. policy exclusion breach)."
+
+    return ConfidenceLevel.HIGH, "HIGH CONFIDENCE: Complete documentation submitted, 0 evidence contradictions detected, and all deterministic rules passed."
+
 def review_claim_package(package: NormalizedClaimPackage) -> ClaimInvestigationReport:
     """
     Run complete end-to-end claim investigation pipeline combining:
@@ -97,27 +132,7 @@ def review_claim_package(package: NormalizedClaimPackage) -> ClaimInvestigationR
     # 4. Gemini Reasoning (if key present / fallback safe)
     gemini_res: GeminiReasoningOutput = analyze_claim_with_gemini(package)
 
-    # 5. Synthesize Decision Matrix
-    # Check for Policy Exclusion REJECTION
-    rule_rejections = [r for r in rules_report.rule_results if r.status == RuleStatus.FAIL]
-    is_rejected = len(rule_rejections) > 0 and any(r.policy_clause_id in ["POL-002", "POL-003", "POL-014"] for r in rule_rejections)
-
-    doc_summary = _build_doc_completeness(package)
-    has_missing_mandatory_docs = not doc_summary.is_complete
-    needs_info_rules = [r for r in rules_report.rule_results if r.status == RuleStatus.NEEDS_INFO]
-
-    has_severe_contradictions = contradiction_report.total_contradictions_found > 0 or gemini_res.reasoning_status == ReasoningStatus.CONTRADICTION_DETECTED
-
-    if is_rejected:
-        exec_result = ExecutiveResult.REJECT
-    elif has_severe_contradictions:
-        exec_result = ExecutiveResult.ESCALATE_FOR_INVESTIGATION
-    elif has_missing_mandatory_docs or len(needs_info_rules) > 0:
-        exec_result = ExecutiveResult.REQUEST_INFORMATION
-    else:
-        exec_result = ExecutiveResult.APPROVE
-
-    # 6. Build Policy Analysis Items with Exact Stored Text
+    # 5. Build Policy Analysis Items with Exact Stored Text
     policy_analysis_items: List[PolicyAnalysisItem] = []
     processed_clauses = set()
 
@@ -156,7 +171,33 @@ def review_claim_package(package: NormalizedClaimPackage) -> ClaimInvestigationR
             cited_evidence_ids=cites[:3]
         ))
 
-    # 7. Build Itemized Evidence Findings with Exact Source Excerpts
+    # 6. Calculate Confidence Model
+    doc_summary = _build_doc_completeness(package)
+    confidence_lvl, confidence_exp = _calculate_confidence_model(
+        doc_summary, contradiction_report, rules_report, gemini_res, policy_analysis_items
+    )
+
+    # 7. Synthesize Decision Matrix
+    # Check for Policy Exclusion REJECTION
+    rule_rejections = [r for r in rules_report.rule_results if r.status == RuleStatus.FAIL]
+    is_rejected = len(rule_rejections) > 0 and any(r.policy_clause_id in ["POL-002", "POL-003", "POL-014"] for r in rule_rejections)
+
+    has_missing_mandatory_docs = not doc_summary.is_complete
+    needs_info_rules = [r for r in rules_report.rule_results if r.status == RuleStatus.NEEDS_INFO]
+    has_severe_contradictions = contradiction_report.total_contradictions_found > 0 or gemini_res.reasoning_status == ReasoningStatus.CONTRADICTION_DETECTED
+
+    if is_rejected:
+        exec_result = ExecutiveResult.REJECT
+    elif has_severe_contradictions:
+        exec_result = ExecutiveResult.ESCALATE_FOR_INVESTIGATION
+    elif has_missing_mandatory_docs or len(needs_info_rules) > 0:
+        exec_result = ExecutiveResult.REQUEST_INFORMATION
+    elif len(policy_analysis_items) == 0:
+        exec_result = ExecutiveResult.ESCALATE_FOR_INVESTIGATION
+    else:
+        exec_result = ExecutiveResult.APPROVE
+
+    # 8. Build Itemized Evidence Findings with Exact Source Excerpts
     findings: List[EvidenceFinding] = []
     finding_counter = 1
 
@@ -173,7 +214,8 @@ def review_claim_package(package: NormalizedClaimPackage) -> ClaimInvestigationR
             source_document_id=c.source_document_a_id,
             source_document_type=c.source_document_a_type,
             exact_source_text=excerpt_a,
-            policy_clause_id="POL-009"
+            policy_clause_id="POL-009",
+            confidence=ConfidenceLevel.LOW
         ))
         finding_counter += 1
 
@@ -192,13 +234,14 @@ def review_claim_package(package: NormalizedClaimPackage) -> ClaimInvestigationR
                 source_document_id=src_id,
                 source_document_type=doc_obj.document_type.value if doc_obj else "RULE_ENGINE",
                 exact_source_text=exact_text,
-                policy_clause_id=r.policy_clause_id
+                policy_clause_id=r.policy_clause_id,
+                confidence=ConfidenceLevel.HIGH if r.status == RuleStatus.FAIL else ConfidenceLevel.MEDIUM
             ))
             finding_counter += 1
 
-    # 8. Recommendation Rationale
+    # 9. Recommendation Rationale
     if exec_result == ExecutiveResult.APPROVE:
-        rationale = f"Claim '{package.claim_id}' meets all policy coverage requirements. Evidence is fully consistent, mandatory documents are present, and all 7 deterministic rules pass."
+        rationale = f"Claim '{package.claim_id}' meets all policy coverage requirements. Evidence is fully consistent, mandatory documents are present, and all deterministic rules pass."
     elif exec_result == ExecutiveResult.REJECT:
         rejection_reasons = [r.explanation for r in rules_report.rule_results if r.status == RuleStatus.FAIL]
         rationale = f"Claim '{package.claim_id}' is REJECTED due to explicit policy conditions / exclusions breach: {'; '.join(rejection_reasons)}"
@@ -207,24 +250,32 @@ def review_claim_package(package: NormalizedClaimPackage) -> ClaimInvestigationR
         rationale = f"Claim '{package.claim_id}' requires additional information before final adjudication: {'; '.join(req_reasons)}"
     else:
         escalate_reasons = [c.explanation for c in contradiction_report.contradictions]
-        rationale = f"Claim '{package.claim_id}' is ESCALATED FOR HUMAN INVESTIGATION due to cross-document evidence contradictions: {'; '.join(escalate_reasons)}"
+        if not escalate_reasons and len(policy_analysis_items) == 0:
+            escalate_reasons = ["UNKNOWN / HUMAN REVIEW: No relevant policy clause found or matched."]
+        rationale = f"Claim '{package.claim_id}' is ESCALATED FOR HUMAN INVESTIGATION due to cross-document evidence contradictions or unknown policy applicability: {'; '.join(escalate_reasons)}"
 
-    # 9. Human Escalation Rationale & Points
+    # 10. Human Escalation Rationale & Points
     requires_escalation = exec_result in [ExecutiveResult.ESCALATE_FOR_INVESTIGATION, ExecutiveResult.REQUEST_INFORMATION]
     escalation_points = []
     for c in contradiction_report.contradictions:
         escalation_points.append(f"Contradiction in {c.field_name}: '{c.source_value_a}' ({c.source_document_a_id}) vs '{c.source_value_b}' ({c.source_document_b_id})")
     for r in needs_info_rules:
         escalation_points.append(f"Policy requirement check '{r.rule_name}': {r.explanation}")
+    if gemini_res.reasoning_status == ReasoningStatus.FALLBACK:
+        escalation_points.append(f"MANUAL REVIEW REQUIRED: Gemini reasoning service fallback triggered ({gemini_res.escalation_reason})")
+    if len(policy_analysis_items) == 0:
+        escalation_points.append("UNKNOWN / HUMAN REVIEW: No applicable policy clause identified.")
 
     human_escalation = HumanEscalationDetail(
         requires_human_review=requires_escalation,
-        reason="Human investigator review required due to evidence contradictions or missing mandatory documentation." if requires_escalation else "No human escalation required. Automated review verified clean evidence.",
+        reason="Human investigator review required due to evidence contradictions, missing mandatory documentation, or AI service fallback." if requires_escalation else "No human escalation required. Automated review verified clean evidence.",
         escalation_points=escalation_points
     )
 
     return ClaimInvestigationReport(
         executive_result=exec_result,
+        overall_confidence=confidence_lvl,
+        confidence_explanation=confidence_exp,
         claim_overview=_build_claim_overview(package),
         document_completeness=doc_summary,
         consistency_analysis=ConsistencyAnalysisSummary(

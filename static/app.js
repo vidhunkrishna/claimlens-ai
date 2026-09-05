@@ -128,20 +128,32 @@ function renderReport(report) {
   const docs = report.document_completeness;
   const consistency = report.consistency_analysis;
   const escalation = report.human_escalation;
+  const confLvl = report.overall_confidence || 'HIGH';
+  const confClass = confLvl.toLowerCase();
 
   let html = `
-    <!-- SECTION 1: Executive Result Banner -->
+    <!-- SECTION 1: Executive Result Banner & Confidence Model -->
     <div class="exec-banner ${resultClass}">
       <div>
         <div class="exec-status-title">EXECUTIVE DECISION RESULT</div>
         <div class="exec-result-text">${report.executive_result.replace(/_/g, ' ')}</div>
         <div class="exec-rationale">${report.recommendation_rationale}</div>
       </div>
-      <div style="text-align: right;">
+      <div style="text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem;">
         <span class="preset-badge ${resultClass === 'approve' ? 'approve' : (resultClass === 'reject' ? 'reject' : 'escalate')}" style="font-size: 0.9rem; padding: 0.4rem 0.8rem;">
           ${report.executive_result}
         </span>
+        <span class="preset-badge ${confClass === 'high' ? 'approve' : (confClass === 'medium' ? 'info' : 'reject')}" style="font-size: 0.85rem; padding: 0.35rem 0.75rem;">
+          EVIDENCE CONFIDENCE: ${confLvl}
+        </span>
       </div>
+    </div>
+  `;
+
+  // Confidence Explanation Card
+  html += `
+    <div style="background: rgba(0, 0, 0, 0.3); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem 1.25rem; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+      <strong style="color: #fff;">Evidence Confidence Classification (${confLvl}):</strong> ${report.confidence_explanation || 'Automated confidence evaluation complete.'}
     </div>
   `;
 

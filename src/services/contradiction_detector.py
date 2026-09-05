@@ -211,6 +211,35 @@ def detect_cross_document_contradictions(package: NormalizedClaimPackage) -> Con
                             confidence_score=1.0
                         ))
 
+    # 3b. Vehicle Registration Contradictions
+    vreg_facts = facts_by_name.get("vehicle_registration", []) + facts_by_name.get("registration_number", [])
+    for i in range(len(vreg_facts)):
+        for j in range(i + 1, len(vreg_facts)):
+            fa = vreg_facts[i]
+            fb = vreg_facts[j]
+            if fa.document_id != fb.document_id and fa.value and fb.value:
+                pair_key = f"vreg-{fa.document_id}-{fb.document_id}"
+                if pair_key not in seen_pairs:
+                    seen_pairs.add(pair_key)
+                    if not _are_values_equivalent(fa.value, fb.value, "vehicle_registration"):
+                        doc_a = docs_by_id.get(fa.document_id)
+                        doc_b = docs_by_id.get(fb.document_id)
+                        contradictions.append(CrossDocumentContradiction(
+                            contradiction_id=f"CONT-{package.claim_id}-vehicle_registration",
+                            field_name="vehicle_registration",
+                            source_document_a_id=fa.document_id,
+                            source_document_a_type=doc_a.document_type.value if doc_a else "DOCUMENT",
+                            source_value_a=fa.value,
+                            source_document_b_id=fb.document_id,
+                            source_document_b_type=doc_b.document_type.value if doc_b else "DOCUMENT",
+                            source_value_b=fb.value,
+                            severity=ContradictionSeverity.HIGH,
+                            explanation=f"Vehicle registration mismatch: '{fa.source_reference}' lists '{fa.value}' whereas '{fb.source_reference}' lists '{fb.value}'.",
+                            status=ContradictionStatus.REQUIRES_INVESTIGATION,
+                            detection_method=DetectionMethod.DETERMINISTIC,
+                            confidence_score=1.0
+                        ))
+
     # 4. Location Contradictions
     loc_facts = facts_by_name.get("incident_location", []) + facts_by_name.get("location_mentioned", [])
     for i in range(len(loc_facts)):
