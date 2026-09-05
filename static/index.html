@@ -127,19 +127,22 @@
         <!-- Dropzones Grid -->
         <div class="upload-dropzone-grid">
           <div class="dropzone" id="dz-cf">
+            <input type="file" id="input-cf" accept=".json" style="display: none;">
             <div class="dropzone-icon">📝</div>
             <h4>Claim Form</h4>
-            <p>Drag & drop claim_form.json</p>
+            <p id="dz-cf-status">Drag & drop claim_form.json</p>
           </div>
           <div class="dropzone" id="dz-fir">
+            <input type="file" id="input-fir" accept=".json" style="display: none;">
             <div class="dropzone-icon">🛡️</div>
             <h4>FIR / Estimate</h4>
-            <p>Drag & drop fir.json or estimate.json</p>
+            <p id="dz-fir-status">Drag & drop fir.json or estimate.json</p>
           </div>
           <div class="dropzone" id="dz-id">
+            <input type="file" id="input-id" accept=".json" style="display: none;">
             <div class="dropzone-icon">💬</div>
             <h4>Incident Description</h4>
-            <p>Drag & drop incident_description.json</p>
+            <p id="dz-id-status">Drag & drop incident_description.json</p>
           </div>
         </div>
 

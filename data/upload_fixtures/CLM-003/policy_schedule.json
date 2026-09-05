@@ -1,0 +1,28 @@
+{
+  "document_id": "DOC-CLM003-PS",
+  "claim_id": "CLM-003",
+  "document_type": "POLICY_SCHEDULE",
+  "source": "Insurer Policy Engine",
+  "content": "Policy Schedule for Private Car Comprehensive Insurance. Policy No: POL-2026-9921. Insured: Anil Sharma. Vehicle: Honda City ZX (DL-03-CC-5544). Engine: 1498 cc. Insured Declared Value (IDV): \u20b99,50,000. Compulsory Deductible: \u20b91,000.",
+  "metadata": {
+    "policy_number": "POL-2026-9921",
+    "insured_name": "Anil Sharma",
+    "vehicle_type": "Private Car",
+    "make_model": "Honda City ZX",
+    "registration_number": "DL-03-CC-5544",
+    "engine_capacity_cc": 1498,
+    "idv": 950000,
+    "compulsory_deductible": 1000,
+    "policy_start_date": "2026-03-10",
+    "policy_end_date": "2027-03-09",
+    "applicable_clauses": [
+      "POL-001",
+      "POL-002",
+      "POL-007",
+      "POL-009",
+      "POL-010",
+      "POL-011",
+      "POL-013"
+    ]
+  }
+}

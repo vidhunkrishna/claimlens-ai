@@ -1,0 +1,14 @@
+{
+  "document_id": "DOC-CLM004-ID",
+  "claim_id": "CLM-004",
+  "document_type": "INCIDENT_DESCRIPTION",
+  "source": "Claimant Written Statement",
+  "content": "Vehicle TN-09-AX-1234 was involved in a side scraping incident against a auto rickshaw on 1st July 2026 in T. Nagar, Chennai. The driver at the time was a visiting relative.",
+  "metadata": {
+    "author": "Karthik N",
+    "statement_date": "2026-08-25",
+    "incident_date_mentioned": "2026-07-01",
+    "driver_identity_specifics": "unspecified visiting relative",
+    "delay_reason_provided": false
+  }
+}

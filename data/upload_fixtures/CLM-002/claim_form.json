@@ -1,0 +1,22 @@
+{
+  "document_id": "DOC-CLM002-CF",
+  "claim_id": "CLM-002",
+  "document_type": "CLAIM_FORM",
+  "source": "Claimant",
+  "content": "Motor Insurance Claim Form submitted by Suresh Patel. Incident Date: 2026-08-15 at 14:30. Intimation Date: 2026-08-19. Driver: Suresh Patel (DL: MH-02-2015-0043211, Valid till 2030-10-10). Vehicle: MH-02-CB-9876. Location: S.V. Road, Andheri West, Mumbai. Damaged Parts: Front Fork, Headlight Assembly. Estimated Amount: \u20b914,200.",
+  "metadata": {
+    "claimant_name": "Suresh Patel",
+    "incident_date": "2026-08-15",
+    "incident_time": "14:30",
+    "intimation_date": "2026-08-19",
+    "driver_name": "Suresh Patel",
+    "driver_license_number": "MH-02-2015-0043211",
+    "vehicle_registration": "MH-02-CB-9876",
+    "incident_location": "S.V. Road, Andheri West, Mumbai",
+    "damaged_parts": [
+      "Front Fork",
+      "Headlight Assembly"
+    ],
+    "estimated_claim_amount": 14200
+  }
+}

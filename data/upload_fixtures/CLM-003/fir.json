@@ -1,0 +1,21 @@
+{
+  "document_id": "DOC-CLM003-FIR",
+  "claim_id": "CLM-003",
+  "document_type": "FIR",
+  "source": "Gurugram Traffic Police & Civil Hospital",
+  "content": "First Information Report No: 402/2026 registered at DLF Phase-2 Police Station, Gurugram. Date of Incident: 2026-08-20 at 02:15 AM. Sections Charged: Sec 279 IPC (Rash driving), Sec 337 IPC, Sec 185 Motor Vehicles Act (Driving under influence of alcohol). Medical Breathalyzer and Civil Hospital Blood Analysis Report confirmed driver Anil Sharma had Blood Alcohol Concentration (BAC) of 0.12% w/v at the time of accident (legal threshold limit: 0.03% w/v). Driver was placed under arrest and released on bail.",
+  "metadata": {
+    "fir_number": "FIR-2026-0402",
+    "police_station": "DLF Phase-2 Police Station, Gurugram",
+    "incident_date": "2026-08-20",
+    "sections_charged": [
+      "Sec 279 IPC",
+      "Sec 337 IPC",
+      "Sec 185 Motor Vehicles Act"
+    ],
+    "blood_alcohol_concentration_bac": "0.12% w/v",
+    "legal_limit_bac": "0.03% w/v",
+    "intoxication_confirmed": true,
+    "violates_policy_clause": "POL-002"
+  }
+}

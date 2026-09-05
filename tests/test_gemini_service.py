@@ -31,10 +31,12 @@ def contradiction_package():
     assert ingest_res.status == "SUCCESS"
     return ingest_res.package
 
-def test_missing_api_key_fallback(sample_package):
+def test_missing_api_key_fallback(monkeypatch, sample_package):
     """
     Test that when GEMINI_API_KEY is missing, the service returns a graceful fallback without crashing.
     """
+    monkeypatch.setenv("GEMINI_API_KEY", "")
+    monkeypatch.setattr("src.core.config.settings.GEMINI_API_KEY", "")
     output = analyze_claim_with_gemini(sample_package, api_key_override="")
     assert output.reasoning_status == ReasoningStatus.FALLBACK
     assert output.requires_human_escalation is True
@@ -213,10 +215,12 @@ def test_gemini_timeout_or_api_exception(sample_package):
         assert output.recommended_action == ReasoningAction.ESCALATE
         assert "Gemini service exception" in output.escalation_reason
 
-def test_api_reasoning_endpoint_fallback():
+def test_api_reasoning_endpoint_fallback(monkeypatch):
     """
     Test API endpoint POST /api/v1/reasoning/analyze/CLM-001 returns fallback when API key is missing.
     """
+    monkeypatch.setenv("GEMINI_API_KEY", "")
+    monkeypatch.setattr("src.core.config.settings.GEMINI_API_KEY", "")
     res = client.post("/api/v1/reasoning/analyze/CLM-001")
     assert res.status_code == 200
     data = res.json()

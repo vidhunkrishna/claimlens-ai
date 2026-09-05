@@ -1,0 +1,19 @@
+{
+  "document_id": "DOC-CLM005-CF",
+  "claim_id": "CLM-005",
+  "document_type": "CLAIM_FORM",
+  "source": "Claimant",
+  "content": "Motor Insurance Theft Claim Form submitted by Vikram R. Theft Date: 2026-08-05. Discovery Date: 2026-08-06 at 08:00 AM. Police FIR Date: 2026-08-06. Insurer Intimation Date: 2026-08-07. Vehicle: KA-05-EV-7788. Location: Indiranagar Metro Station Parking, Bengaluru. Claim Type: Total Theft. Claimed Amount: \u20b91,10,000 (IDV).",
+  "metadata": {
+    "claimant_name": "Vikram R",
+    "theft_date": "2026-08-05",
+    "discovery_date": "2026-08-06",
+    "discovery_time": "08:00",
+    "fir_filing_date": "2026-08-06",
+    "intimation_date": "2026-08-07",
+    "vehicle_registration": "KA-05-EV-7788",
+    "incident_location": "Indiranagar Metro Station Parking, Bengaluru",
+    "claim_type": "TOTAL_THEFT",
+    "estimated_claim_amount": 110000
+  }
+}

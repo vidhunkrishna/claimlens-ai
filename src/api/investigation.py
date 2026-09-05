@@ -9,24 +9,6 @@ from src.services.investigation_engine import review_claim_package
 
 router = APIRouter(prefix="/api/v1/investigation", tags=["Claim Investigation Pipeline"])
 
-@router.post("/review/{claim_id}", response_model=ClaimInvestigationReport)
-def review_claim_by_id(claim_id: str):
-    """
-    Execute the complete evidence-backed claim investigation pipeline for a claim ID.
-    Generates structured 9-section report with exact source citations.
-    """
-    ingest_res = ingest_claim_from_directory(claim_id)
-    if ingest_res.status == "FAILED" or not ingest_res.package:
-        raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-            detail={
-                "message": f"Cannot review claim '{claim_id}': ingestion failed",
-                "errors": [err.model_dump() for err in ingest_res.errors]
-            }
-        )
-
-    return review_claim_package(ingest_res.package)
-
 @router.post("/review/package", response_model=ClaimInvestigationReport)
 def review_custom_package(payload: Dict[str, Any]):
     """
@@ -47,6 +29,24 @@ def review_custom_package(payload: Dict[str, Any]):
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             detail={
                 "message": f"Cannot review custom claim package '{claim_id}': ingestion failed",
+                "errors": [err.model_dump() for err in ingest_res.errors]
+            }
+        )
+
+    return review_claim_package(ingest_res.package)
+
+@router.post("/review/{claim_id}", response_model=ClaimInvestigationReport)
+def review_claim_by_id(claim_id: str):
+    """
+    Execute the complete evidence-backed claim investigation pipeline for a claim ID.
+    Generates structured 9-section report with exact source citations.
+    """
+    ingest_res = ingest_claim_from_directory(claim_id)
+    if ingest_res.status == "FAILED" or not ingest_res.package:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail={
+                "message": f"Cannot review claim '{claim_id}': ingestion failed",
                 "errors": [err.model_dump() for err in ingest_res.errors]
             }
         )

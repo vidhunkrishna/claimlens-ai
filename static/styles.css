@@ -357,6 +357,11 @@ main {
   background: rgba(6, 182, 212, 0.05);
 }
 
+.dropzone.uploaded {
+  border-color: var(--color-approve);
+  background: rgba(16, 185, 129, 0.08);
+}
+
 .dropzone-icon {
   font-size: 2rem;
   margin-bottom: 0.5rem;

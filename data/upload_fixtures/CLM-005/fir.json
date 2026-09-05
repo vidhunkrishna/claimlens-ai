@@ -1,0 +1,16 @@
+{
+  "document_id": "DOC-CLM005-FIR",
+  "claim_id": "CLM-005",
+  "document_type": "FIR",
+  "source": "Indiranagar Police Station, Bengaluru",
+  "content": "First Information Report No: 288/2026 registered at Indiranagar Police Station, Bengaluru under Section 379 IPC (Theft). Date of Reporting: 2026-08-06 at 11:30 AM. Stolen Property: Yamaha FZ-S V3 Motorcycle (Reg: KA-05-EV-7788, Engine: E339120, Chassis: ME1099210). Complainant: Vikram R. Police investigation initiated, Metro parking CCTV footage requested. Non-Traceable Report process underway.",
+  "metadata": {
+    "fir_number": "FIR-2026-0288",
+    "police_station": "Indiranagar PS, Bengaluru",
+    "fir_date": "2026-08-06",
+    "section_charged": "Section 379 IPC",
+    "stolen_vehicle_registration": "KA-05-EV-7788",
+    "non_traceable_status": "PENDING_INVESTIGATION",
+    "satisfies_policy_clause": "POL-009"
+  }
+}

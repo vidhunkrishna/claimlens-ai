@@ -1,0 +1,27 @@
+{
+  "document_id": "DOC-CLM004-CF",
+  "claim_id": "CLM-004",
+  "document_type": "CLAIM_FORM",
+  "source": "Claimant",
+  "content": "Motor Insurance Claim Form submitted by Karthik N. Incident Date: 2026-07-01. Intimation Date: 2026-08-25. Driver Name: Relative (Driving License Number: NOT PROVIDED / BLANK). Vehicle: TN-09-AX-1234. Location: T. Nagar, Chennai. Damaged Parts: Left Front Fender. Estimated Amount: \u20b912,000.",
+  "metadata": {
+    "claimant_name": "Karthik N",
+    "incident_date": "2026-07-01",
+    "intimation_date": "2026-08-25",
+    "intimation_delay_days": 55,
+    "driver_name": "Relative",
+    "driver_license_number": null,
+    "driver_license_provided": false,
+    "vehicle_registration": "TN-09-AX-1234",
+    "incident_location": "T. Nagar, Chennai",
+    "damaged_parts": [
+      "Left Front Fender"
+    ],
+    "estimated_claim_amount": 12000,
+    "missing_required_fields": [
+      "driver_license_number",
+      "driver_license_document",
+      "delay_justification_letter"
+    ]
+  }
+}

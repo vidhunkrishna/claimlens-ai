@@ -1,0 +1,23 @@
+{
+  "document_id": "DOC-CLM003-CF",
+  "claim_id": "CLM-003",
+  "document_type": "CLAIM_FORM",
+  "source": "Claimant",
+  "content": "Motor Insurance Claim Form submitted by Anil Sharma. Incident Date: 2026-08-20 at 02:15. Intimation Date: 2026-08-22. Driver: Anil Sharma (DL: DL-03-2016-0087654, Valid till 2031-11-20). Vehicle: DL-03-CC-5544. Location: NH-48 Flyover, Gurugram. Damaged Parts: Front Radiator, Bonnet, Engine Subframe. Estimated Amount: \u20b91,45,000.",
+  "metadata": {
+    "claimant_name": "Anil Sharma",
+    "incident_date": "2026-08-20",
+    "incident_time": "02:15",
+    "intimation_date": "2026-08-22",
+    "driver_name": "Anil Sharma",
+    "driver_license_number": "DL-03-2016-0087654",
+    "vehicle_registration": "DL-03-CC-5544",
+    "incident_location": "NH-48 Flyover, Gurugram",
+    "damaged_parts": [
+      "Front Radiator",
+      "Bonnet",
+      "Engine Subframe"
+    ],
+    "estimated_claim_amount": 145000
+  }
+}

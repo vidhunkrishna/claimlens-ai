@@ -1,0 +1,27 @@
+{
+  "document_id": "DOC-CLM002-PS",
+  "claim_id": "CLM-002",
+  "document_type": "POLICY_SCHEDULE",
+  "source": "Insurer Policy Engine",
+  "content": "Policy Schedule for Two-Wheeler Comprehensive Insurance. Policy No: POL-2026-3342. Insured: Suresh Patel. Vehicle: TVS Jupiter (MH-02-CB-9876). Engine: 109 cc. Insured Declared Value (IDV): \u20b965,000. Compulsory Deductible: \u20b9100.",
+  "metadata": {
+    "policy_number": "POL-2026-3342",
+    "insured_name": "Suresh Patel",
+    "vehicle_type": "Two-Wheeler",
+    "make_model": "TVS Jupiter 110",
+    "registration_number": "MH-02-CB-9876",
+    "engine_capacity_cc": 109,
+    "idv": 65000,
+    "compulsory_deductible": 100,
+    "policy_start_date": "2026-02-01",
+    "policy_end_date": "2027-01-31",
+    "applicable_clauses": [
+      "POL-001",
+      "POL-007",
+      "POL-009",
+      "POL-010",
+      "POL-011",
+      "POL-013"
+    ]
+  }
+}
