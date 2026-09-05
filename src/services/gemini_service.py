@@ -91,7 +91,7 @@ def analyze_claim_with_gemini(
     valid_evidence_ids = [doc.document_id for doc in package.documents]
     
     # 1. Check API Key
-    api_key = api_key_override or os.getenv("GEMINI_API_KEY") or settings.GEMINI_API_KEY
+    api_key = api_key_override if api_key_override is not None else (os.getenv("GEMINI_API_KEY") or settings.GEMINI_API_KEY)
     if not api_key or api_key.strip() == "":
         logger.warning("GEMINI_API_KEY is not configured. Returning graceful fallback state.")
         return create_fallback_reasoning_output(
