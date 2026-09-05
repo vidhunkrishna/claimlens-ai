@@ -82,6 +82,11 @@ def test_valid_gemini_response(sample_package):
         assert len(output.policy_analysis) == 1
         assert output.policy_analysis[0].clause_id == "POL-001"
 
+        # Verify that generate_content was called with settings.GEMINI_MODEL
+        from src.core.config import settings
+        call_kwargs = mock_client.models.generate_content.call_args.kwargs
+        assert call_kwargs["model"] == settings.GEMINI_MODEL
+
 def test_malformed_json_response(sample_package):
     """
     Test graceful fallback when Gemini returns malformed non-JSON output.
@@ -227,3 +232,39 @@ def test_api_reasoning_endpoint_fallback(monkeypatch):
     assert data["reasoning_status"] == "FALLBACK"
     assert data["requires_human_escalation"] is True
     assert data["recommended_action"] == "ESCALATE"
+
+def test_gemini_model_configuration_and_override(monkeypatch, sample_package):
+    """
+    Test that analyze_claim_with_gemini uses settings.GEMINI_MODEL and respects environment variable overrides.
+    """
+    from src.core.config import settings
+    custom_model = "gemini-2.0-flash-exp"
+    monkeypatch.setattr(settings, "GEMINI_MODEL", custom_model)
+
+    valid_json = {
+        "reasoning_status": "CONFIDENT",
+        "investigator_summary": "Summary",
+        "semantic_contradictions": [],
+        "policy_analysis": [],
+        "recommended_action": "APPROVE",
+        "requires_human_escalation": False,
+        "escalation_reason": None,
+        "cited_evidence_ids": [],
+        "cited_policy_clause_ids": []
+    }
+
+    mock_response = MagicMock()
+    mock_response.text = json.dumps(valid_json)
+
+    with patch("google.genai.Client") as MockGenaiClient:
+        mock_client = MagicMock()
+        mock_client.models.generate_content.return_value = mock_response
+        MockGenaiClient.return_value = mock_client
+
+        output = analyze_claim_with_gemini(sample_package, api_key_override="fake-test-key")
+        assert output.reasoning_status == ReasoningStatus.CONFIDENT
+
+        mock_client.models.generate_content.assert_called_once()
+        call_kwargs = mock_client.models.generate_content.call_args.kwargs
+        assert call_kwargs["model"] == custom_model
+

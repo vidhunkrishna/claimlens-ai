@@ -215,12 +215,13 @@ pip install -r requirements.txt
 ```
 
 ### 2. Environment Configuration (Optional for Gemini)
-Set your Gemini API key in a local `.env` file or environment variable:
+Set your Gemini API key and optional model selection in a local `.env` file or environment variable:
 ```bash
 # In .env or shell environment:
 GEMINI_API_KEY=your_gemini_api_key_here
+GEMINI_MODEL=gemini-3.6-flash
 ```
-*(If no API key is provided, ClaimLens AI operates seamlessly in offline fallback mode).*
+*(If no API key is provided, ClaimLens AI operates seamlessly in offline fallback mode. If `GEMINI_MODEL` is unconfigured, it defaults to `gemini-3.6-flash`).*
 
 ### 3. Launch Server
 Start the unified application with a single command:

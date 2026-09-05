@@ -148,7 +148,7 @@ Return a JSON object with EXACTLY the following keys:
         client = genai.Client(api_key=api_key.strip())
         
         response = client.models.generate_content(
-            model="gemini-3.6-flash",
+            model=settings.GEMINI_MODEL,
             contents=prompt,
             config=types.GenerateContentConfig(
                 response_mime_type="application/json",
