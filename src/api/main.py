@@ -1,4 +1,7 @@
-from fastapi import FastAPI
+import os
+from fastapi import FastAPI, Request
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from src.core.config import settings
 from src.api.health import router as health_router
@@ -41,8 +44,20 @@ def create_app() -> FastAPI:
     app.include_router(contradictions_router)
     app.include_router(investigation_router)
 
-    @app.get("/", response_model=RootResponse, tags=["Root"])
-    def read_root():
+    # Mount static files directory for frontend UI assets
+    if os.path.exists("static"):
+        app.mount("/static", StaticFiles(directory="static"), name="static")
+
+    @app.get("/", tags=["Root"])
+    def read_root(request: Request):
+        accept = request.headers.get("accept", "")
+        # If requested by browser HTML navigation, return frontend application
+        if "text/html" in accept:
+            index_path = os.path.join("static", "index.html")
+            if os.path.exists(index_path):
+                return FileResponse(index_path, media_type="text/html")
+        
+        # Default JSON response for programmatic API calls & test suite
         return RootResponse(
             message="Welcome to ClaimLens AI API",
             service=settings.APP_NAME,
@@ -54,3 +69,4 @@ def create_app() -> FastAPI:
     return app
 
 app = create_app()
+

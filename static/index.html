@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClaimLens AI — Insurance Claims Evidence Review Assistant</title>
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔍</text></svg>">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand" onclick="showScreen('screen-dashboard')">
+        <div class="brand-icon">🔍</div>
+        <div class="brand-text">
+          <h1>ClaimLens AI</h1>
+          <p>Motor Claims Evidence Review Engine (PS02)</p>
+        </div>
+      </a>
+
+      <div class="nav-tabs">
+        <button class="nav-tab active" id="tab-dashboard" onclick="showScreen('screen-dashboard')">
+          📊 Dashboard
+        </button>
+        <button class="nav-tab" id="tab-upload" onclick="showScreen('screen-upload')">
+          📁 Upload & Select
+        </button>
+        <button class="nav-tab" id="tab-analysis" onclick="showScreen('screen-analysis')">
+          ⚡ Analysis
+        </button>
+        <button class="nav-tab" id="tab-report" onclick="showScreen('screen-report')">
+          📑 Investigation Report
+        </button>
+      </div>
+
+      <div class="api-status-badge">
+        <div class="status-dot"></div>
+        <span id="api-status-text">API ONLINE</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main>
+
+    <!-- SCREEN 1: Dashboard -->
+    <section id="screen-dashboard" class="screen active">
+      <!-- Metric Counters -->
+      <div class="dashboard-grid">
+        <div class="metric-card">
+          <div class="metric-title">Claims Analyzed</div>
+          <div class="metric-value">5 <span class="metric-sub">Synthetic Suite</span></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-title">Pass / Approval Rate</div>
+          <div class="metric-value" style="color: var(--color-approve);">40% <span class="metric-sub">Clean Cases</span></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-title">Contradiction Escalations</div>
+          <div class="metric-value" style="color: var(--color-escalate);">20% <span class="metric-sub">CLM-002 Flagged</span></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-title">Policy Rejections</div>
+          <div class="metric-value" style="color: var(--color-reject);">20% <span class="metric-sub">Exclusion Breaches</span></div>
+        </div>
+      </div>
+
+      <!-- Presets Header & Grid -->
+      <div class="presets-header">
+        <div>
+          <h2>Synthetic Claims Presets</h2>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">Select a test claim package to initiate end-to-end evidence investigation</p>
+        </div>
+      </div>
+
+      <div class="synthetic-grid">
+        <!-- CLM-001 -->
+        <div class="preset-card" onclick="analyzePreset('CLM-001')">
+          <span class="preset-badge approve">Expected: APPROVE</span>
+          <div class="preset-id">CLM-001</div>
+          <div class="preset-desc">Clean Normal Claim — Private Car accidental damage with fully consistent documents and complete evidence.</div>
+          <button class="preset-btn">Analyze CLM-001 →</button>
+        </div>
+
+        <!-- CLM-002 -->
+        <div class="preset-card" onclick="analyzePreset('CLM-002')">
+          <span class="preset-badge escalate">Expected: ESCALATE / REQ INFO</span>
+          <div class="preset-id">CLM-002</div>
+          <div class="preset-desc">Contradiction Case — Multiple severe cross-document mismatches in incident date, location, driver, and damaged parts.</div>
+          <button class="preset-btn">Analyze CLM-002 →</button>
+        </div>
+
+        <!-- CLM-003 -->
+        <div class="preset-card" onclick="analyzePreset('CLM-003')">
+          <span class="preset-badge reject">Expected: REJECT</span>
+          <div class="preset-id">CLM-003</div>
+          <div class="preset-desc">Drunk Driving Exclusion — FIR records BAC 0.12% and charges under Sec 185 MVA, violating clause POL-002.</div>
+          <button class="preset-btn">Analyze CLM-003 →</button>
+        </div>
+
+        <!-- CLM-004 -->
+        <div class="preset-card" onclick="analyzePreset('CLM-004')">
+          <span class="preset-badge info">Expected: REQ INFO</span>
+          <div class="preset-id">CLM-004</div>
+          <div class="preset-desc">Missing DL & Reporting Delay — 55-day intimation delay (exceeds 7-day window) and missing driving license copy.</div>
+          <button class="preset-btn">Analyze CLM-004 →</button>
+        </div>
+
+        <!-- CLM-005 -->
+        <div class="preset-card" onclick="analyzePreset('CLM-005')">
+          <span class="preset-badge approve">Expected: APPROVE</span>
+          <div class="preset-id">CLM-005</div>
+          <div class="preset-desc">Total Theft Claim — EV stolen while parked with Police FIR and key surrender compliance under clause POL-012.</div>
+          <button class="preset-btn">Analyze CLM-005 →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: Claim Upload -->
+    <section id="screen-upload" class="screen">
+      <div class="upload-container">
+        <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">Claim Evidence Upload</h2>
+        <p style="font-size: 0.9rem; color: var(--text-muted);">Upload custom JSON evidence documents or pick a synthetic claim preset for automated review.</p>
+
+        <!-- Dropzones Grid -->
+        <div class="upload-dropzone-grid">
+          <div class="dropzone" id="dz-cf">
+            <div class="dropzone-icon">📝</div>
+            <h4>Claim Form</h4>
+            <p>Drag & drop claim_form.json</p>
+          </div>
+          <div class="dropzone" id="dz-fir">
+            <div class="dropzone-icon">🛡️</div>
+            <h4>FIR / Estimate</h4>
+            <p>Drag & drop fir.json or estimate.json</p>
+          </div>
+          <div class="dropzone" id="dz-id">
+            <div class="dropzone-icon">💬</div>
+            <h4>Incident Description</h4>
+            <p>Drag & drop incident_description.json</p>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <label style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">Quick Select Preset:</label>
+            <select id="preset-dropdown" style="padding: 0.5rem 1rem; background: #000; border: 1px solid var(--border-color); color: #fff; border-radius: var(--radius-sm);">
+              <option value="CLM-001">CLM-001 (Clean Normal Case)</option>
+              <option value="CLM-002">CLM-002 (Contradiction Case)</option>
+              <option value="CLM-003">CLM-003 (Drunk Driving Exclusion)</option>
+              <option value="CLM-004">CLM-004 (Missing DL & Reporting Delay)</option>
+              <option value="CLM-005">CLM-005 (Total Theft & Key Surrender)</option>
+            </select>
+          </div>
+
+          <button class="action-btn" onclick="startAnalysisFromDropdown()">
+            ⚡ Initiate Investigation
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: Analysis Progress -->
+    <section id="screen-analysis" class="screen">
+      <div class="analysis-container">
+        <div class="loader-spinner"></div>
+        <h2 style="font-size: 1.5rem; font-weight: 700; color: #fff;" id="analysis-title">Analyzing Claim Evidence...</h2>
+        <p style="font-size: 0.9rem; color: var(--text-muted);" id="analysis-subtitle">Executing multi-layer deterministic rules, cross-document contradiction check, and RAG policy retrieval.</p>
+
+        <div class="analysis-steps">
+          <div class="step-item" id="step-1">
+            <div class="step-icon">1</div>
+            <div>Ingesting & Normalizing Document Payloads</div>
+          </div>
+          <div class="step-item" id="step-2">
+            <div class="step-icon">2</div>
+            <div>Evaluating 7 Deterministic Insurance Rules</div>
+          </div>
+          <div class="step-item" id="step-3">
+            <div class="step-icon">3</div>
+            <div>Pairwise Cross-Document Contradiction Analysis</div>
+          </div>
+          <div class="step-item" id="step-4">
+            <div class="step-icon">4</div>
+            <div>Local Vector Policy Clause Retrieval (RAG)</div>
+          </div>
+          <div class="step-item" id="step-5">
+            <div class="step-icon">5</div>
+            <div>Gemini Semantic Reasoning & Citation Sanitization</div>
+          </div>
+          <div class="step-item" id="step-6">
+            <div class="step-icon">6</div>
+            <div>Assembling Structured 9-Section Final Report</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 4: Investigation Report (MOST IMPORTANT SCREEN) -->
+    <section id="screen-report" class="screen">
+      <div class="report-grid" id="report-content">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal / Drawer overlay for source text & evidence viewer -->
+  <div class="modal-overlay" id="evidence-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title">Source Evidence Viewer</h3>
+        <button class="close-btn" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body" id="modal-body">
+        <!-- Raw content inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
